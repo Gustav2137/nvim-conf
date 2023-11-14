@@ -287,8 +287,8 @@ noremap <leader>n :noh<CR>
 
 nnoremap <leader>z :set foldmethod=marker<CR>
 nnoremap <leader>x :set foldmethod=manual<CR>
-nmap J 10j
-nmap K 10k
+map J 10j
+map K 10k
 
 let g:airline_highlighting_cache = 1
 
