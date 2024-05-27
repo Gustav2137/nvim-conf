@@ -31,7 +31,6 @@ Plug 'https://github.com/neoclide/coc.nvim',{'branch': 'release'} " Auto Complet
 Plug 'https://github.com/terryma/vim-multiple-cursors' " CTRL + N for multiple cursors
 Plug 'https://github.com/preservim/tagbar' " Tagbar for code navigation
 Plug 'https://github.com/ryanoasis/vim-devicons' " Developer Icons
-Plug 'https://github.com/terryma/vim-multiple-cursors' " CTRL + N for multiple cursors
 Plug 'honza/vim-snippets' " Snippets
 Plug 'ellisonleao/gruvbox.nvim' " Colour scheme
 
@@ -40,13 +39,8 @@ Plug 'ellisonleao/gruvbox.nvim' " Colour scheme
 Plug 'lewis6991/gitsigns.nvim'
 
 Plug 'nvim-tree/nvim-web-devicons'
-Plug 'akinsho/bufferline.nvim', { 'tag': 'v3.*' }
-
+Plug 'akinsho/bufferline.nvim'
 Plug 'windwp/nvim-autopairs'
-
-" Julia
-Plug 'JuliaEditorSupport/julia-vim'
-Plug 'kdheepak/JuliaFormatter.vim'
 
 " Haskell
 " Plug 'enomsg/vim-haskellConcealPlus'
@@ -287,8 +281,8 @@ noremap <leader>n :noh<CR>
 
 nnoremap <leader>z :set foldmethod=marker<CR>
 nnoremap <leader>x :set foldmethod=manual<CR>
-nmap J 10j
-nmap K 10k
+map J 10j
+map K 10k
 
 let g:airline_highlighting_cache = 1
 
