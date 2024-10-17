@@ -59,6 +59,8 @@ Plug 'nvim-treesitter/nvim-treesitter'
 
 Plug 'https://github.com/luochen1990/rainbow'
 
+Plug 'https://github.com/easymotion/vim-easymotion'
+
 set encoding=UTF-8
 
 call plug#end()
