@@ -60,6 +60,10 @@ Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'https://github.com/luochen1990/rainbow'
 
 Plug 'https://github.com/easymotion/vim-easymotion'
+Plug 'tpope/vim-surround'
+
+Plug 'ocaml/vim-ocaml'
+Plug 'tjdevries/ocaml.nvim'
 
 set encoding=UTF-8
 
@@ -306,7 +310,6 @@ require("which-key").setup {
 
 vim.o.timeout = true
 vim.o.timeoutlen = 300
-vim.o.mouse = ''
 
 EOF
 
@@ -317,8 +320,6 @@ noremap <leader>n :noh<CR>
 
 nnoremap <leader>z :set foldmethod=marker<CR>
 nnoremap <leader>x :set foldmethod=manual<CR>
-map J 10j
-map K 10k
 
 let g:airline_highlighting_cache = 1
 
