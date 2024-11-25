@@ -62,9 +62,6 @@ Plug 'https://github.com/luochen1990/rainbow'
 Plug 'https://github.com/easymotion/vim-easymotion'
 Plug 'tpope/vim-surround'
 
-Plug 'ocaml/vim-ocaml'
-Plug 'tjdevries/ocaml.nvim'
-
 set encoding=UTF-8
 
 call plug#end()
@@ -73,8 +70,8 @@ call plug#end()
 
 nnoremap <C-t> :NERDTreeToggle<CR>
 nnoremap <C-Ins> :TagbarToggle<CR>
-nnoremap <leader><Tab> :bnext<CR>
-nnoremap <leader><S-Tab> :bprev<CR>
+nnoremap <Tab> :bnext<CR>
+nnoremap <S-Tab> :bprev<CR>
 nnoremap <leader>D :bd<CR>
 
 "coc
