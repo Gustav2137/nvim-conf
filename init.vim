@@ -94,3 +94,4 @@ set background=dark
 colorscheme gruvbox-material
 set laststatus=2
 set cmdheight=1
+set cursorline

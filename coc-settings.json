@@ -1,4 +1,7 @@
 {
+  "inlayHint.enable": true,
+  "inlayHint.enableParameter": true,
+  "inlayHint.position": "eol",
   "languageserver": {
     "ccls": {
       "command": "ccls",
@@ -21,10 +24,11 @@
           "directory": "/tmp/ccls"
         },
         "clang": {
-          "extra_args": [ "-std=c++20" ]
+          "extra_args": [
+            "-std=c++20"
+          ]
         }
       }
-      
     },
     "ocaml-lsp": {
       "command": "opam",
