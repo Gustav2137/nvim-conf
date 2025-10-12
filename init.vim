@@ -5,6 +5,11 @@
 :set clipboard+=unnamedplus
 :set mouse=a
 
+function! EditConfig()
+  edit ~/.config/nvim/init.vim
+endfunction
+
+command Config call EditConfig()
 
 function! UseTabs()
   set tabstop=4     " Size of a hard tabstop (ts).
@@ -50,7 +55,7 @@ Plug 'bfrg/vim-cpp-modern'
 Plug 'anufrievroman/vim-tex-kawaii'
 Plug 'lervag/vimtex'
 
-Plug 'puremourning/vimspector'
+Plug 'mfussenegger/nvim-dap'
 Plug 'vim-scripts/restore_view.vim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
@@ -62,6 +67,12 @@ Plug 'nvim-telescope/telescope.nvim'
 
 Plug 'echasnovski/mini.nvim'
 Plug 'https://github.com/nvim-lualine/lualine.nvim'
+
+Plug 'nvim-tree/nvim-web-devicons' " Recommended (for coloured icons)
+Plug 'akinsho/bufferline.nvim', { 'tag': '*' }
+
+Plug 'https://github.com/lambdalisue/vim-suda' " Opening files with sudo permissions
+
 set encoding=UTF-8
 
 call plug#end()
@@ -72,9 +83,7 @@ nnoremap <C-t> :NERDTreeToggle<CR>
 nnoremap <C-r> :TagbarToggle<CR>
 nnoremap <Tab> :bnext<CR>
 nnoremap <S-Tab> :bprev<CR>
-nnoremap <leader>D :bd<CR>
-
-let g:vimspector_enable_mappings = 'HUMAN'
+nnoremap <leader>D :bd!<CR>
 
 noremap <leader>f :Format<CR>
 noremap <leader>n :noh<CR>
@@ -82,6 +91,7 @@ noremap <leader>n :noh<CR>
 nnoremap <leader>z :set foldmethod=marker<CR>
 nnoremap <leader>x :set foldmethod=manual<CR>
 nnoremap <space>x :source ~/.config/nvim/init.vim<CR>
+nnoremap <leader>t :CocCommand document.toggleInlayHint<CR>
 
 set termguicolors
 
@@ -95,3 +105,5 @@ colorscheme gruvbox-material
 set laststatus=2
 set cmdheight=1
 set cursorline
+
+let g:coc_node_path = '/home/linuxbrew/.linuxbrew/bin/node'

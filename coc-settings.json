@@ -1,42 +1,16 @@
 {
   "inlayHint.enable": true,
   "inlayHint.enableParameter": true,
-  "inlayHint.position": "eol",
+  "inlayHint.position": "inline",
+  "inlayHint.refreshOnInsertMode": true,
   "languageserver": {
-    "ccls": {
-      "command": "ccls",
-      "filetypes": [
-        "c",
-        "cc",
-        "cpp",
-        "c++",
-        "objc",
-        "objcpp"
-      ],
-      "rootPatterns": [
-        ".ccls",
-        "compile_commands.json",
-        ".git/",
-        ".hg/"
-      ],
-      "initializationOptions": {
-        "cache": {
-          "directory": "/tmp/ccls"
-        },
-        "clang": {
-          "extra_args": [
-            "-std=c++20"
-          ]
-        }
-      }
-    },
     "ocaml-lsp": {
-      "command": "opam",
+      "command": "dune",
       "args": [
-        "config",
+        "tools",
         "exec",
-        "--",
-        "ocamllsp"
+        "ocamllsp",
+        "--"
       ],
       "filetypes": [
         "ocaml",
@@ -62,5 +36,6 @@
       ]
     }
   },
-  "snippets.ultisnips.pythonPrompt": false
+  "snippets.ultisnips.pythonPrompt": false,
+  "clangd.path": "/home/linuxbrew/.linuxbrew/bin/clangd"
 }

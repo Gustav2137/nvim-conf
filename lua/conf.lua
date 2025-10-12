@@ -4,6 +4,7 @@ require("mini.move").setup()
 require("mini.git").setup()
 require("mini.diff").setup()
 require("mini.icons").setup()
+require("bufferline").setup()
 
 require("lualine").setup()
 
