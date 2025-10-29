@@ -106,4 +106,4 @@ set laststatus=2
 set cmdheight=1
 set cursorline
 
-let g:coc_node_path = '/home/linuxbrew/.linuxbrew/bin/node'
+runtime node.vim
