@@ -223,3 +223,10 @@ keyset("n", "<space>k", ":<C-u>CocPrev<cr>", opts)
 keyset("n", "<space>p", ":<C-u>CocListResume<cr>", opts)
 
 keyset("i","<Tab>", 'pumvisible() ? coc#_select_confirm() : "<Tab>"', {expr=true})
+
+-- open file_browser with the path of the current buffer
+vim.keymap.set({"n"}, "<C-e>", ":Telescope file_browser path=%:p:h select_buffer=true<CR>")
+function _G.file_browser_cwd()
+  vim.cmd(string.format("Telescope file_browser path=%s",vim.loop.cwd()))
+end
+vim.keymap.set("n", "<C-t>", "<CMD>lua _G.file_browser_cwd()<CR>", {silent=true})

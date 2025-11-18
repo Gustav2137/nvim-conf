@@ -30,7 +30,6 @@ endfunction
 
 call plug#begin()
 
-Plug 'https://github.com/preservim/nerdtree' " NerdTree
 Plug 'https://github.com/tpope/vim-commentary' " For Commenting gcc & gc
 Plug 'https://github.com/neoclide/coc.nvim',{'branch': 'release'} " Auto Completion
 Plug 'https://github.com/preservim/tagbar' " Tagbar for code navigation
@@ -41,7 +40,6 @@ Plug 'https://github.com/sainnhe/gruvbox-material'
 
 Plug 'folke/which-key.nvim'
 
-" idk czy działa
 Plug 'lewis6991/gitsigns.nvim'
 
 " Haskell
@@ -73,14 +71,20 @@ Plug 'akinsho/bufferline.nvim', { 'tag': '*' }
 
 Plug 'https://github.com/lambdalisue/vim-suda' " Opening files with sudo permissions
 
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-telescope/telescope-file-browser.nvim'
+
+" glsl syntax highlighting
+Plug 'tikhomirov/vim-glsl'
+
 set encoding=UTF-8
 
 call plug#end()
 
 lua require('conf')
 
-nnoremap <C-t> :NERDTreeToggle<CR>
-nnoremap <C-r> :TagbarToggle<CR>
+nnoremap <C-y> :TagbarToggle<CR>
 nnoremap <Tab> :bnext<CR>
 nnoremap <S-Tab> :bprev<CR>
 nnoremap <leader>D :bd!<CR>
