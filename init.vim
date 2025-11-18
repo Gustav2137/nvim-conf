@@ -81,8 +81,8 @@ lua require('conf')
 
 nnoremap <C-t> :NERDTreeToggle<CR>
 nnoremap <C-r> :TagbarToggle<CR>
-nnoremap <Tab> :bnext<CR>
-nnoremap <S-Tab> :bprev<CR>
+nnoremap gt :bnext<CR>
+nnoremap gT :bprev<CR>
 nnoremap <leader>D :bd!<CR>
 
 noremap <leader>f :Format<CR>
@@ -105,5 +105,28 @@ colorscheme gruvbox-material
 set laststatus=2
 set cmdheight=1
 set cursorline
+
+function! BufPos_ActivateBuffer(num)
+    let l:count = 1
+    for i in range(1, bufnr("$"))
+        if buflisted(i) && getbufvar(i, "&modifiable") 
+            if l:count == a:num
+                exe "buffer " . i
+                return 
+            endif
+            let l:count = l:count + 1
+        endif
+    endfor
+    echo "No buffer!"
+endfunction
+
+function! BufPos_Initialize()
+    for i in range(1, 9) 
+        exe "map <A-" . i . "> :call BufPos_ActivateBuffer(" . i . ")<CR>"
+    endfor
+    exe "map <A-0> :call BufPos_ActivateBuffer(10)<CR>"
+endfunction
+
+autocmd VimEnter * call BufPos_Initialize()
 
 runtime node.vim
