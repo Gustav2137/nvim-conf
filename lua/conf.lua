@@ -1,31 +1,70 @@
-require("mini.indentscope").setup()
 require("mini.pairs").setup()
 require("mini.move").setup()
 require("mini.git").setup()
 require("mini.diff").setup()
 require("mini.icons").setup()
-require("bufferline").setup()
+require("mini.indentscope").setup()
+require("ibl").setup()
+local bufferline = require("bufferline")
+bufferline.setup {
+  options = {
+    mode = "tabs",
+    numbers = "ordinal",
+    diagnostic = "coc",
+    diagnostics_update_on_event = false,
+    separator_style = "slant",
+    name_formatter = function(buf)
+      local names = vim.tbl_map(function(buffNumber)
+        local n = vim.api.nvim_buf_get_name(buffNumber)
+        return vim.fn.fnamemodify(n, ":t")
+      end, buf.buffers)
+      names = vim.tbl_filter(function(s) return s ~= "" end, names)
+      return table.concat(names, " | ")
+    end,
+  }
+}
+
+require("telescope").setup {
+  extensions = {
+    file_browser = {
+      theme = "ivy",
+      -- disables netrw and use telescope-file-browser in its place
+      hijack_netrw = true,
+      mappings = {
+        ["i"] = {
+          -- your custom insert mode mappings
+        },
+        ["n"] = {
+          -- your custom normal mode mappings
+        },
+      },
+    },
+  },
+}
+-- To get telescope-file-browser loaded and working with telescope,
+-- you need to call load_extension, somewhere after setup function:
+require("telescope").load_extension "file_browser"
 
 require("lualine").setup()
 
 require("which-key").setup {
   plugins = {
-    marks = true,         -- shows a list of your marks on ' and `
-    registers = true,     -- shows your registers on " in NORMAL or <C-r> in INSERT mode
+    marks = true,     -- shows a list of your marks on ' and `
+    registers = true, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
     -- the presets plugin, adds help for a bunch of default keybindings in Neovim
     -- No actual key bindings are created
     spelling = {
-      enabled = true,         -- enabling this will show WhichKey when pressing z= to select spelling suggestions
-      suggestions = 20,       -- how many suggestions should be shown in the list?
+      enabled = true,   -- enabling this will show WhichKey when pressing z= to select spelling suggestions
+      suggestions = 20, -- how many suggestions should be shown in the list?
     },
     presets = {
-      operators = true,          -- adds help for operators like d, y, ...
-      motions = true,            -- adds help for motions
-      text_objects = true,       -- help for text objects triggered after entering an operator
-      windows = true,            -- default bindings on <c-w>
-      nav = true,                -- misc bindings to work with windows
-      z = true,                  -- bindings for folds, spelling and others prefixed with z
-      g = true,                  -- bindings for prefixed with g
+      operators = true,    -- adds help for operators like d, y, ...
+      motions = true,      -- adds help for motions
+      text_objects = true, -- help for text objects triggered after entering an operator
+      windows = true,      -- default bindings on <c-w>
+      nav = true,          -- misc bindings to work with windows
+      z = true,            -- bindings for folds, spelling and others prefixed with z
+      g = true,            -- bindings for prefixed with g
     },
   },
   icons = {
@@ -69,9 +108,9 @@ local opts = { silent = true, noremap = true, expr = true, replace_keycodes = fa
 keyset("i", "<C-n>", 'coc#pum#visible() ? coc#pum#next(1) : v:lua.check_back_space() ? "<C-n>" : coc#refresh()', opts)
 keyset("i", "<C-p>", [[coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"]], opts)
 
--- Make <CR> to accept selected completion item or notify coc.nvim to format
+-- Make <CR> to notify coc.nvim to format
 -- <C-g>u breaks current undo, please make your own choice
-keyset("i", "<cr>", [[coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"]], opts)
+keyset("i", "<cr>", [["\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"]], opts)
 
 -- Use <c-j> to trigger snippets
 -- keyset("i", "<c-j>", "<Plug>(coc-snippets-expand-jump)")
@@ -222,11 +261,15 @@ keyset("n", "<space>k", ":<C-u>CocPrev<cr>", opts)
 -- Resume latest coc list
 keyset("n", "<space>p", ":<C-u>CocListResume<cr>", opts)
 
-keyset("i","<Tab>", 'pumvisible() ? coc#_select_confirm() : "<Tab>"', {expr=true})
+vim.keymap.set({ "i" }, "<Tab>", 'pumvisible() ? coc#_select_confirm() : "<Tab>"', { expr = true })
 
 -- open file_browser with the path of the current buffer
-vim.keymap.set({"n"}, "<C-e>", ":Telescope file_browser path=%:p:h select_buffer=true<CR>")
+vim.keymap.set({ "n" }, "<C-e>", ":Telescope file_browser path=%:p:h select_buffer=true<CR>", { silent = true })
 function _G.file_browser_cwd()
-  vim.cmd(string.format("Telescope file_browser path=%s",vim.loop.cwd()))
+  vim.cmd(string.format("Telescope file_browser path=%s", vim.fn.getcwd()))
 end
-vim.keymap.set("n", "<C-t>", "<CMD>lua _G.file_browser_cwd()<CR>", {silent=true})
+
+vim.keymap.set("n", "<C-t>", "<CMD>lua _G.file_browser_cwd()<CR>", { silent = true })
+
+vim.keymap.set("n", "<C-q>", ":tabe<CR><C-t>", { silent = true, remap = true })
+vim.keymap.set("n", "<leader>s", "<C-w>v<leader>h", { remap = true })

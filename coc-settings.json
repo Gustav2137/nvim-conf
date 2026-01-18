@@ -37,5 +37,5 @@
     }
   },
   "snippets.ultisnips.pythonPrompt": false,
-  "clangd.path": "/home/linuxbrew/.linuxbrew/bin/clangd"
+  "clangd.arguments": ["-header-insertion=iwyu"]
 }

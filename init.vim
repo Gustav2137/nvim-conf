@@ -6,10 +6,15 @@
 :set mouse=a
 
 function! EditConfig()
-  edit ~/.config/nvim/init.vim
+  tabe ~/.config/nvim/init.vim
+endfunction
+
+function! EditLuaConfig()
+  tabe ~/.config/nvim/lua/conf.lua
 endfunction
 
 command Config call EditConfig()
+command LuaConfig call EditLuaConfig()
 
 function! UseTabs()
   set tabstop=4     " Size of a hard tabstop (ts).
@@ -54,7 +59,6 @@ Plug 'anufrievroman/vim-tex-kawaii'
 Plug 'lervag/vimtex'
 
 Plug 'mfussenegger/nvim-dap'
-Plug 'vim-scripts/restore_view.vim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 Plug 'https://github.com/easymotion/vim-easymotion'
@@ -75,6 +79,8 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-file-browser.nvim'
 
+Plug 'lukas-reineke/indent-blankline.nvim'
+
 " glsl syntax highlighting
 Plug 'tikhomirov/vim-glsl'
 
@@ -85,17 +91,28 @@ call plug#end()
 lua require('conf')
 
 nnoremap <C-y> :TagbarToggle<CR>
-nnoremap gt :bnext<CR>
-nnoremap gT :bprev<CR>
 nnoremap <leader>D :bd!<CR>
+nnoremap <leader>C :windo bd!<CR>
 
-noremap <leader>f :Format<CR>
-noremap <leader>n :noh<CR>
+nnoremap <leader>f :Format<CR>
+nnoremap <leader>n :noh<CR>
 
 nnoremap <leader>z :set foldmethod=marker<CR>
 nnoremap <leader>x :set foldmethod=manual<CR>
 nnoremap <space>x :source ~/.config/nvim/init.vim<CR>
 nnoremap <leader>t :CocCommand document.toggleInlayHint<CR>
+nnoremap <leader>h :CocCommand clangd.switchSourceHeader<CR>
+
+nnoremap <A-0> :tabn 10<CR>
+nnoremap <A-1> :tabn 1<CR>
+nnoremap <A-2> :tabn 2<CR>
+nnoremap <A-3> :tabn 3<CR>
+nnoremap <A-4> :tabn 4<CR>
+nnoremap <A-5> :tabn 5<CR>
+nnoremap <A-6> :tabn 6<CR>
+nnoremap <A-7> :tabn 7<CR>
+nnoremap <A-8> :tabn 8<CR>
+nnoremap <A-9> :tabn 9<CR>
 
 set termguicolors
 
@@ -109,28 +126,5 @@ colorscheme gruvbox-material
 set laststatus=2
 set cmdheight=1
 set cursorline
-
-function! BufPos_ActivateBuffer(num)
-    let l:count = 1
-    for i in range(1, bufnr("$"))
-        if buflisted(i) && getbufvar(i, "&modifiable") 
-            if l:count == a:num
-                exe "buffer " . i
-                return 
-            endif
-            let l:count = l:count + 1
-        endif
-    endfor
-    echo "No buffer!"
-endfunction
-
-function! BufPos_Initialize()
-    for i in range(1, 9) 
-        exe "map <A-" . i . "> :call BufPos_ActivateBuffer(" . i . ")<CR>"
-    endfor
-    exe "map <A-0> :call BufPos_ActivateBuffer(10)<CR>"
-endfunction
-
-autocmd VimEnter * call BufPos_Initialize()
 
 runtime node.vim
